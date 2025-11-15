@@ -1,7 +1,7 @@
 name: Pulumi Deploy
 
 permissions:
-  id-token: write     # Required for OIDC
+  id-token: write
   contents: read
 
 on:
@@ -15,32 +15,32 @@ jobs:
 
     steps:
       - name: Checkout
-      uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Configure AWS credentials (OIDC)
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        role-to-assume: arn:aws:iam::287526490745:role/Pulumi-GitHub-Policy
-        aws-region: ca-central-1
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::287526490745:role/Pulumi-GitHub-Policy
+          aws-region: ca-central-1
 
       - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
       - name: Install Pulumi CLI
-      uses: pulumi/actions@v4
+        uses: pulumi/actions@v4
 
       - name: Login to Pulumi
-      env:
-        PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
-      run: pulumi login
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+        run: pulumi login
 
       - name: Select Pulumi Stack
-      run: pulumi stack select geethnandini47/pulumi-static-website/dev
+        run: pulumi stack select geethnandini47/pulumi-static-website/dev
 
       - name: Install dependencies
-      run: npm install
+        run: npm install
 
       - name: Pulumi Up
-      run: pulumi up --yes
+        run: pulumi up --yes

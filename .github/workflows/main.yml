@@ -37,7 +37,7 @@ jobs:
         run: pulumi login
 
       - name: Select Pulumi Stack
-        run: pulumi stack select geethnandini47/pulumi-static-website/dev
+        run: pulumi stack select geethnandini47/pulumi-static-site/dev
 
       - name: Install dependencies
         run: npm install
